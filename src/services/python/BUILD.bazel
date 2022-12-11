@@ -6,6 +6,7 @@ buildifier(
 )
 
 py_binary(
-  name = "main",
+  name = "hello_python",
   srcs = ["main.py"],
+  main = "main.py",
 )
