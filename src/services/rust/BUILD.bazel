@@ -1,0 +1,12 @@
+load("@rules_rust//rust:defs.bzl", "rust_binary")
+load("@com_github_bazelbuild_buildtools//buildifier:def.bzl", "buildifier")
+
+buildifier(
+    name = "buildifier",
+)
+
+rust_binary(
+    name = "hello_rust",
+    srcs = ["main.rs"],
+    edition = "2021",
+)
