@@ -1,9 +1,17 @@
 #!/usr/bin/env bash
+set -x
 
 # Go to the root of the repo
 cd "$(git rev-parse --show-toplevel)"
 
 # Get a list of the current files in package form by querying Bazel.
+if [[ ! -z $GITHUB_BASE_REF ]]; then
+  head = git merge-base origin/main HEAD
+  changedFiles = git diff --name-only $GITHUB_SHA..$head
+else
+  changedFiles = git diff --name-only HEAD~1
+fi
+
 files=()
 for file in $(git diff --name-only ${GITHUB_SHA}..HEAD); do
   echo $file
