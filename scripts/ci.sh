@@ -5,11 +5,11 @@ set -euxo
 cd "$(git rev-parse --show-toplevel)"
 
 # Get a list of the current files in package form by querying Bazel.
+head=$(git merge-base origin/main HEAD)
 if [[ ! -z $GITHUB_BASE_REF ]]; then
-  head=$(git merge-base origin/main HEAD)
   changedFiles=$(git diff --name-only $GITHUB_SHA..$head)
 else
-  changedFiles=$(git diff --name-only HEAD~1)
+  changedFiles=$(git diff --name-only $head~1)
 fi
 
 files=()
