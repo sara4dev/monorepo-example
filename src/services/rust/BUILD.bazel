@@ -1,5 +1,6 @@
 load("@rules_rust//rust:defs.bzl", "rust_binary")
 load("@com_github_bazelbuild_buildtools//buildifier:def.bzl", "buildifier")
+load("@io_bazel_rules_docker//rust:image.bzl", "rust_image")
 
 buildifier(
     name = "buildifier",
@@ -7,6 +8,12 @@ buildifier(
 
 rust_binary(
     name = "hello_rust",
+    srcs = ["main.rs"],
+    edition = "2021",
+)
+
+rust_image(
+    name = "rust_image",
     srcs = ["main.rs"],
     edition = "2021",
 )

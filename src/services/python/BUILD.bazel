@@ -1,5 +1,6 @@
 load("@rules_python//python:defs.bzl", "py_binary")
 load("@com_github_bazelbuild_buildtools//buildifier:def.bzl", "buildifier")
+load("@io_bazel_rules_docker//python3:image.bzl", "py3_image")
 
 buildifier(
     name = "buildifier",
@@ -7,6 +8,12 @@ buildifier(
 
 py_binary(
     name = "hello_python",
+    srcs = ["main.py"],
+    main = "main.py",
+)
+
+py3_image(
+    name = "py3_image",
     srcs = ["main.py"],
     main = "main.py",
 )
