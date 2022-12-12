@@ -20,10 +20,10 @@ rust_image(
 )
 
 container_push(
-   name = "publish",
-   image = ":rust_image",
-   format = "Docker",
-   registry = "index.docker.io",
-   repository = "speriyasamy/monorepo_example_rust",
-   tag = "dev",
+    name = "publish",
+    format = "Docker",
+    image = ":rust_image",
+    registry = "index.docker.io",
+    repository = "speriyasamy/monorepo_example_rust",
+    tag = "dev",
 )

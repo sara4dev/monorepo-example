@@ -3,7 +3,6 @@ load("@com_github_bazelbuild_buildtools//buildifier:def.bzl", "buildifier")
 load("@io_bazel_rules_docker//go:image.bzl", "go_image")
 load("@io_bazel_rules_docker//container:container.bzl", "container_push")
 
-
 buildifier(
     name = "buildifier",
 )
@@ -28,10 +27,10 @@ go_image(
 )
 
 container_push(
-   name = "publish",
-   image = ":go_image",
-   format = "Docker",
-   registry = "index.docker.io",
-   repository = "speriyasamy/monorepo_example_go",
-   tag = "dev",
+    name = "publish",
+    format = "Docker",
+    image = ":go_image",
+    registry = "index.docker.io",
+    repository = "speriyasamy/monorepo_example_go",
+    tag = "dev",
 )

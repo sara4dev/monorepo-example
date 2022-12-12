@@ -8,6 +8,19 @@ jobs:
   ci:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: bazelbuild/setup-bazelisk@v1.0.1
-      - run: bazel build //...
+    - name: checkout source code
+      uses: actions/checkout@v3
+    - name: setup bazelisk
+      uses: bazelbuild/setup-bazelisk@v2
+    - name: Mount bazel cache  # Optional
+      uses: actions/cache@v3
+      with:
+        path: "~/.cache/bazel"
+        key: bazel
+    - name: Docker Login
+      uses: docker/login-action@v2.1.0
+      with:
+        username: speriyasamy
+        password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+    - name: build docker images
+      run: scripts/ci.sh
