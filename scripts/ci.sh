@@ -14,13 +14,24 @@ for file in $(git diff --name-only); do
 done
 
 
-# Query for the associated buildables
-buildables=$(bazelisk query \
+# Query for the associated buildImages
+buildImages=$(bazelisk query \
     --keep_going \
-    "filter(.*_image, rdeps(//..., set(${files[*]})))")
+    "filter(.*_image$, rdeps(//..., set(${files[*]})))")    
 
-# Build the targets only for the chnaged files
-if [[ ! -z $buildables ]]; then
+# Build the docker images only for the changed services
+if [[ ! -z $buildImages ]]; then
   echo "Building docker images"
-  bazelisk build $buildables
+  bazelisk build $buildImages
+fi
+
+# Query for the associated Images to push
+pushImages=$(bazelisk query \
+    --keep_going \
+    "kind(container_push, rdeps(//..., set(${files[*]})))")
+
+# Push the docker images only for the changed services
+if [[ ! -z $pushImages ]]; then
+  echo "Pushing docker images"
+  bazelisk run $pushImages
 fi

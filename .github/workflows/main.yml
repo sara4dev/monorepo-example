@@ -22,5 +22,5 @@ jobs:
       with:
         username: speriyasamy
         password: ${{ secrets.DOCKER_HUB_PASSWORD }}
-    - name: build docker images
+    - name: build & push docker images
       run: scripts/ci.sh
