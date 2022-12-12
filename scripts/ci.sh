@@ -6,6 +6,7 @@ cd "$(git rev-parse --show-toplevel)"
 # Get a list of the current files in package form by querying Bazel.
 files=()
 for file in $(git diff --name-only ${GITHUB_SHA}..HEAD); do
+  echo $file
   if [[ $file = src/* ]]
   then
     files+=($(bazelisk query $file))
