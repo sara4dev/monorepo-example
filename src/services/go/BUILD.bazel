@@ -1,6 +1,8 @@
 load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
 load("@com_github_bazelbuild_buildtools//buildifier:def.bzl", "buildifier")
 load("@io_bazel_rules_docker//go:image.bzl", "go_image")
+load("@io_bazel_rules_docker//container:container.bzl", "container_push")
+
 
 buildifier(
     name = "buildifier",
@@ -23,4 +25,13 @@ go_image(
     name = "go_image",
     srcs = ["main.go"],
     importpath = "github.com/sara4dev/monorepo_example",
+)
+
+container_push(
+   name = "publish",
+   image = ":go_image",
+   format = "Docker",
+   registry = "index.docker.io",
+   repository = "speriyasamy/monorepo_example_go",
+   tag = "dev",
 )

@@ -1,6 +1,7 @@
 load("@rules_python//python:defs.bzl", "py_binary")
 load("@com_github_bazelbuild_buildtools//buildifier:def.bzl", "buildifier")
 load("@io_bazel_rules_docker//python3:image.bzl", "py3_image")
+load("@io_bazel_rules_docker//container:container.bzl", "container_push")
 
 buildifier(
     name = "buildifier",
@@ -16,4 +17,13 @@ py3_image(
     name = "py3_image",
     srcs = ["main.py"],
     main = "main.py",
+)
+
+container_push(
+   name = "publish",
+   image = ":py3_image",
+   format = "Docker",
+   registry = "index.docker.io",
+   repository = "speriyasamy/monorepo_example_python",
+   tag = "dev",
 )
