@@ -14,7 +14,11 @@
 		"vscode": {
 			// Add the IDs of extensions you want installed when the container is created.
 			"extensions": [
-				"devondcarew.bazel-code"
+				"BazelBuild.vscode-bazel",
+				"ms-kubernetes-tools.vscode-kubernetes-tools",
+				"golang.go",
+				"ms-python.python",
+				"rust-lang.rust-analyzer"
 			]
 		}
 	},
