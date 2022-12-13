@@ -5,6 +5,7 @@ set -euxo
 cd "$(git rev-parse --show-toplevel)"
 
 git --version
+git log
 
 # Get a list of the current files in package form by querying Bazel.
 if [[ ! -z $GITHUB_BASE_REF ]]; then
