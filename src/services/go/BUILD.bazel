@@ -32,5 +32,14 @@ container_push(
     image = ":go_image",
     registry = "index.docker.io",
     repository = "speriyasamy/monorepo_example_go",
+    tag = "main",
+)
+
+container_push(
+    name = "publish_dev",
+    format = "Docker",
+    image = ":go_image",
+    registry = "index.docker.io",
+    repository = "speriyasamy/monorepo_example_go",
     tag = "dev",
 )

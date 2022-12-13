@@ -5,10 +5,12 @@ set -euxo
 cd "$(git rev-parse --show-toplevel)"
 
 # Get a list of the current files in package form by querying Bazel.
-if [[ ! -z $GITHUB_BASE_REF ]]; then
-  changedFiles=$(git diff --name-only origin/main)
-else
+if [[ $GITHUB_REF_NAME = main ]]; then
   changedFiles=$(git diff --name-only HEAD~1)
+  publishTarget="publish$"
+else
+  changedFiles=$(git diff --name-only origin/main)
+  publishTarget="publish_dev$"
 fi
 
 echo "Changed FIles: $changedFiles"
@@ -38,7 +40,7 @@ fi
 echo "Query for the associated Images to push"
 pushImages=$(bazelisk query \
     --keep_going \
-    "kind(container_push, rdeps(//..., set(${files[*]})))")
+    "filter(${publishTarget}, rdeps(//..., set(${files[*]})))")
 
 echo "Push the docker images only for the changed services"
 if [[ ! -z $pushImages ]]; then
