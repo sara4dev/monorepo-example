@@ -43,7 +43,7 @@ pushImages=$(bazelisk query \
     "filter(${publishTarget}, rdeps(//..., set(${files[*]})))")
 
 echo "Push the docker images only for the changed services"
-if [[ ! -z $pushImages ]]; then
-  echo "Pushing docker images"
-  GIT_SHA=$GITHUB_SHA bazelisk run $pushImages
-fi
+for pushImage in $pushImages; do
+  echo "Pushing docker image $pushImage"
+  bazelisk run $pushImage
+done
