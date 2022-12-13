@@ -16,7 +16,7 @@ def sara_container_push(image,repository):
         image = image,
         registry = "index.docker.io",
         repository = repository,
-        tag = "{GIT_SHA}",
+        tag = "{STABLE_GIT_COMMIT}",
     )
 
     container_push(
@@ -34,5 +34,5 @@ def sara_container_push(image,repository):
         image = image,
         registry = "index.docker.io",
         repository = repository,
-        tag = "{GIT_SHA}",
+        tag = "{STABLE_GIT_COMMIT}",
     )
