@@ -7,10 +7,10 @@ cd "$(git rev-parse --show-toplevel)"
 # Get a list of the current files in package form by querying Bazel.
 if [[ $GITHUB_REF_NAME = main ]]; then
   changedFiles=$(git diff --name-only HEAD~1)
-  publishTarget="publish$"
+  publishTarget=".*main_publish$"
 else
   changedFiles=$(git diff --name-only origin/main)
-  publishTarget="publish_dev$"
+  publishTarget=".*dev_publish$"
 fi
 
 echo "Changed FIles: $changedFiles"
@@ -45,5 +45,5 @@ pushImages=$(bazelisk query \
 echo "Push the docker images only for the changed services"
 if [[ ! -z $pushImages ]]; then
   echo "Pushing docker images"
-  bazelisk run $pushImages
+  GIT_SHA=$GITHUB_SHA bazelisk run $pushImages
 fi
