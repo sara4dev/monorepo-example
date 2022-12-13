@@ -11,7 +11,7 @@ jobs:
     - name: checkout source code
       uses: actions/checkout@v3
       with:
-        fetch-depth: 2
+        fetch-depth: 0
     - name: setup bazelisk
       uses: bazelbuild/setup-bazelisk@v2
     - name: Mount bazel cache  # Optional
