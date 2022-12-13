@@ -10,7 +10,7 @@ git --version
 if [[ ! -z $GITHUB_BASE_REF ]]; then
   changedFiles=$(git diff --name-only origin/main)
 else
-  changedFiles=$(git diff --name-only HEAD~1)
+  changedFiles=$(git diff --name-only $GITHUB_SHA~1)
 fi
 
 echo $changedFiles
