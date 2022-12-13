@@ -4,6 +4,8 @@ set -euxo
 # Go to the root of the repo
 cd "$(git rev-parse --show-toplevel)"
 
+git --version
+
 # Get a list of the current files in package form by querying Bazel.
 if [[ ! -z $GITHUB_BASE_REF ]]; then
   changedFiles=$(git diff --name-only origin/main)
