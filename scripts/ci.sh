@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -euxo
+set -e
 
 # Go to the root of the repo
 cd "$(git rev-parse --show-toplevel)"
