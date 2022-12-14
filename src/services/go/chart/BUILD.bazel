@@ -1,0 +1,17 @@
+load("@com_github_masmovil_bazel_rules//helm:helm.bzl", "helm_chart", "helm_push", "helm_release")
+
+helm_chart(
+    name = "go_service_helm",
+    srcs = glob(["**"]),
+    package_name = "chart",
+    chart_deps = [
+    "//src/infra/charts/service_base:service_base_helm"
+  ]
+)
+
+
+genrule(
+  name = "go_service_helm_push",
+  cmd = "date >> $@",
+  outs = ["date.txt"],
+)

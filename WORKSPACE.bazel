@@ -3,6 +3,7 @@ workspace(
 )
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 
 # go rules
 # https://github.com/bazelbuild/rules_go#overview
@@ -112,3 +113,17 @@ load(
 )
 
 _rust_image_repos()
+
+# helm rules
+git_repository(
+    name = "com_github_masmovil_bazel_rules",
+    # tag = "0.2.2",
+    commit = "b3db8107d2c7d91be1ca828ddd92705077bf313a",
+    remote = "https://github.com/masmovil/bazel-rules.git",
+)
+
+load(
+    "@com_github_masmovil_bazel_rules//repositories:repositories.bzl",
+    mm_repositories = "repositories",
+)
+mm_repositories()

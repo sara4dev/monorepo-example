@@ -1,0 +1,8 @@
+load("@com_github_masmovil_bazel_rules//helm:helm.bzl", "helm_chart", "helm_push", "helm_release")
+
+helm_chart(
+    name = "service_base_helm",
+    srcs = glob(["**"]),
+    package_name = "service_base",
+    visibility = ["//visibility:public"],
+)
