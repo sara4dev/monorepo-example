@@ -1,8 +1,17 @@
 load("@com_github_masmovil_bazel_rules//helm:helm.bzl", "helm_chart", "helm_push", "helm_release")
+load("@//:bazel/helm.bzl", "helm_chart_release")
+
 
 helm_chart(
-    name = "service_base_helm",
+    name = "helm.package",
     srcs = glob(["**"]),
     package_name = "service_base",
     visibility = ["//visibility:public"],
+)
+
+helm_chart_release(
+    name = "helm.release",
+    github_repo = "monorepo_example",
+    github_user = "sara4dev",
+    github_token = "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"
 )
