@@ -127,3 +127,17 @@ load(
     mm_repositories = "repositories",
 )
 mm_repositories()
+
+
+# helm chart releaser
+load("@//:bazel/helm.bzl", "helm_chart_releaser_download")
+
+helm_chart_releaser_download(
+    name = " "
+)
+
+
+# bazel_skylib
+load("@bazel_skylib//:workspace.bzl", "bazel_skylib_workspace")
+
+bazel_skylib_workspace()
