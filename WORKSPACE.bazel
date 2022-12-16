@@ -130,11 +130,9 @@ mm_repositories()
 
 
 # helm chart releaser
-load("@//:bazel/helm.bzl", "helm_chart_releaser_download")
+load("@//rules:repo.bzl", "helm_chart_releaser_tools")
 
-helm_chart_releaser_download(
-    name = " "
-)
+helm_chart_releaser_tools()
 
 
 # bazel_skylib

@@ -1,0 +1,10 @@
+package(default_visibility = ["//visibility:public"])
+
+genrule(
+    name = "cr_runtime",
+    output_to_bindir = 1,
+    srcs = ["@cr//:cr"],
+    outs = ["bin/cr"],
+    cmd = "cp $(<) $(@)",
+    executable = True,
+)
