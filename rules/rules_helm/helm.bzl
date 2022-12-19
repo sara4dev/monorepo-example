@@ -29,7 +29,7 @@ helm_chart_package = rule(
             allow_files = True,
         ),
         "_crbin": attr.label(
-            default = Label("//rules:cr_runtime"),
+            default = Label("//rules/rules_helm:chart_releaser_runtime"),
             executable = True,
             allow_single_file = True,
             cfg = "host",
@@ -67,7 +67,7 @@ helm_chart_release = rule(
         "github_user": attr.string(default = "sara4dev"),
         "github_token": attr.string(mandatory = True),
         "_crbin": attr.label(
-            default = Label("//rules:cr_runtime"),
+            default = Label("//rules/rules_helm:chart_releaser_runtime"),
             executable = True,
             allow_single_file = True,
             cfg = "host",

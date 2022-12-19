@@ -1,7 +1,7 @@
 package(default_visibility = ["//visibility:public"])
 
 genrule(
-    name = "cr_runtime",
+    name = "chart_releaser_runtime",
     output_to_bindir = 1,
     srcs = ["@cr//:cr"],
     outs = ["bin/cr"],

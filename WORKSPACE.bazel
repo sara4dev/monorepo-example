@@ -130,7 +130,7 @@ mm_repositories()
 
 
 # helm chart releaser
-load("@//rules:repo.bzl", "helm_chart_releaser_tools")
+load("@//rules/rules_helm:repo.bzl", "helm_chart_releaser_tools")
 
 helm_chart_releaser_tools()
 
