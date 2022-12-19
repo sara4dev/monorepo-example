@@ -48,3 +48,45 @@ helm_chart_release = rule(
     },
     executable = True,
 )
+
+def _helm_chart_package_impl(ctx):
+    out_log = ctx.actions.declare_file("out.log")
+    pkg_cmd = "{cr_path} package {src_path}/ >> {out_log}".format(
+        cr_path = ctx.executable._crbin.path,
+        src_path = ctx.files.srcs[0].dirname,
+        out_log = out_log.path,
+    )
+
+    ctx.actions.run_shell(
+        command = pkg_cmd,
+        inputs = ctx.files.srcs,
+        use_default_shell_env = True,
+        tools = ctx.files._crbin,
+        outputs = [out_log]
+    )
+
+    return [DefaultInfo(
+        files = depset([out_log]),
+    )]
+
+
+helm_chart_package = rule(
+    implementation = _helm_chart_package_impl,
+    attrs = {
+        "srcs": attr.label_list(
+            mandatory = True,
+            allow_files = True,
+        ),
+        "_crbin": attr.label(
+            default = Label("//rules:cr_runtime"),
+            executable = True,
+            allow_single_file = True,
+            cfg = "host",
+        ),
+        "_cr_pkg_tpl": attr.label(
+            default = Label("//rules:cr_pkg.sh.tpl"),
+            allow_single_file = True,
+        ),
+    },
+    executable = False,
+)
